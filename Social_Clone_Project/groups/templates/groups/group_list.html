@@ -4,7 +4,7 @@
         <div class="content">
             {% if user.is_authenticated %}
                 <h2>Welcome Back</h2>
-                    <a href="{% url 'post:for_user' username=user.username %}">
+                    <a href="{% url 'posts:for_user' username=user.username %}">
                         @{{ user.username }}
                     </a>
             {% endif %}
@@ -31,7 +31,7 @@
                                 member{{ group.members.count|pluralize }}
                             </div>
                             <div class="col-md-4">
-                                <span class="badge">{{ group.post.count }}</span>
+                                <span class="badge">{{ group.posts.count }}</span>
                                 post{{ group.posts.count|pluralize }}
                             </div>
                         </div>

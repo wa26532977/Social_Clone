@@ -1,10 +1,25 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
+<div class="container">
 
-</body>
-</html>
+    <h3><a href="{% url 'posts:for_user' username=post.user.username %}">@{{ post.user.username }}</a></h3>
+	<div class="media-body">
+{#		<strong>{{ post.user.username }}</strong>#}
+        <div class="contents">
+            <h5>{{ post.message_html|safe }}</h5>
+            <p><time class="time"><a href="{% url 'posts:single' username=post.user.username pk=post.pk %}">{{ post.created_at }}</a></time></p>
+            {% if post.group %}
+            <span class="group-name">in <a href="#">{{ post.group.name }}</a></span>
+            {% endif %}
+        </div>
+
+
+		<div class="media-footer">
+			{% if user.is_authenticated and post.user == user and not hide_delete %}
+				<a href="{% url 'posts:delete' pk=post.pk %}" title="delete" class="btn btn-simple">
+					<span class="fa fa-remove text-danger" aria-hidden="true"></span>
+					<span class="text-danger icon-label">Delete</span>
+				</a>
+			{% endif %}
+		</div>
+	</div>
+    <br>
+</div>
